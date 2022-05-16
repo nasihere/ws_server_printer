@@ -12,7 +12,7 @@ function uploadToS3(req,res, file, success_callback) {
 
  const fs = require('fs');
 let data = file.data // you image stored on arrayBuffer variable;
-data = Buffer.from(data);
+data = data;
 fs.writeFile(file.name, data, err => { // Assets is a folder present in your root directory
       if (err) {
          console.log(err);
