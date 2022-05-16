@@ -51,7 +51,7 @@ app.post('/print', upload.none(), (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-  const { username, connectionId } = req.body;
+  let { username, connectionId } = req.body;
   username = username.substring(0,username.indexOf("@"));
   console.log(username, connectionId)
   memConnections[username] = connectionId;
