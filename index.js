@@ -7,11 +7,11 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const multer = require('multer');
-multer({
+
+const upload = multer();
+upload({
   limits: { fieldSize: 25 * 1024 * 1024 }
 })
-const upload = multer();
-
 const app = express();
 const port = 3002;
 
