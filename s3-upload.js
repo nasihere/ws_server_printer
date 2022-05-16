@@ -9,8 +9,19 @@ function uploadToS3(req,res, file, success_callback) {
    Bucket: BUCKET_NAME,
  });
  console.log("S3", file.data)
- require('fs').writeFileSync(file.name, Buffer.from(file.data));
 
+ const fs = require('fs');
+let data = file.data // you image stored on arrayBuffer variable;
+data = Buffer.from(data);
+fs.writeFile(file.name, data, err => { // Assets is a folder present in your root directory
+      if (err) {
+         console.log(err);
+      } else {
+         console.log('File created successfully!');
+      }
+}); 
+
+ 
  s3bucket.createBucket(function () {
    var params = {
     Bucket: BUCKET_NAME,
