@@ -46,8 +46,10 @@ function uploadPDF(req,res,filedata) {
 
 }
 app.post('/print', upload.none(), (req, res) => {
-  console.log("strat")
+  console.log("printer command triggered");
+  console.log(req.body, 'req.body')
     const formData = req.body.data;
+
     uploadPDF(req,res,formData);
 });
 
