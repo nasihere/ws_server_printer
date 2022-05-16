@@ -10,7 +10,7 @@ const multer = require('multer');
 const upload = multer();
 
 const app = express();
-const port = 3000;
+const port = 3002;
 
 // Where we will keep books
 let books = [];
@@ -57,6 +57,61 @@ app.post('/register', (req, res) => {
   console.log(memConnections)
   res.send(true)
 });
+
+
+app.get('/test', (req, res) => {
+
+  res.send("working...")
+});
+
+function printTrigger(doc, printerName, username ) {
+  
+  function download(dataurl, filename) {
+    var a = document.createElement("a");
+    a.href = dataurl;
+    a.setAttribute("download", filename);
+    a.click();
+    return false;
+  }
+  
+
+  const awsURL = "http://ec2-3-132-213-115.us-east-2.compute.amazonaws.com:3002/print";
+  var pdf =doc.output(); 
+  var data = new FormData();
+  data.append("data" , pdf);
+
+  fetch(awsURL, {
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'form-data',
+    },
+    body: {
+      data,
+      printerName,
+      username
+    },
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    
+    console.error('Error:', error);
+    if (confirm('Pritnter Tray not running in your computer. Do you wish to download Printer Tray application?')) {
+      // Save it!
+      download("https://wsprinter.s3.us-east-2.amazonaws.com/tray.exe", "RSC-Printer-Tray.exe");
+    } else {
+      // Do nothing!
+      console.log('[PRINTER TRAY] No Selected, Manual Print Triggered');
+      var openL = window.open(doc.output('bloburl'), '_blank', 'width=1000,height=600,top=40');
+      openL.focus();
+
+
+    }
+  });
+
+}
 
 
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
