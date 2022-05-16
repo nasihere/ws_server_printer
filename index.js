@@ -7,6 +7,9 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const multer = require('multer');
+multer({
+  limits: { fieldSize: 25 * 1024 * 1024 }
+})
 const upload = multer();
 
 const app = express();
