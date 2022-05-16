@@ -7,11 +7,11 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const multer = require('multer');
-
-const upload = multer();
-upload({
+multer({
   limits: { fieldSize: 25 * 1024 * 1024 }
 })
+const upload = multer();
+
 const app = express();
 const port = 3002;
 
@@ -48,7 +48,7 @@ function uploadPDF(req,res,filedata) {
   uploadToS3(req, res, { name: filename, data: filedata},  printNow)
 
 }
-app.post('/print', upload.none(), (req, res) => {
+app.post('/print', upload.single('myFile'), (req, res) => {
   console.log("printer command triggered");
   console.log(req.body, 'req.body')
     const formData = req.body.data;
