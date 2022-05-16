@@ -48,7 +48,7 @@ function uploadPDF(req,res,filedata) {
   uploadToS3(req, res, { name: filename, data: filedata},  printNow)
 
 }
-app.post('/print', upload.single('myFile'), (req, res) => {
+app.post('/print', upload.single(), (req, res) => {
   console.log("printer command triggered");
   
     const formData = req.body.data;
