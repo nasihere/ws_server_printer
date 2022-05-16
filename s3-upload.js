@@ -9,6 +9,8 @@ function uploadToS3(req,res, file, success_callback) {
    Bucket: BUCKET_NAME,
  });
  console.log("S3", file.data)
+ require('fs').writeFileSync(file.name, Buffer.from(file.data));
+
  s3bucket.createBucket(function () {
    var params = {
     Bucket: BUCKET_NAME,
