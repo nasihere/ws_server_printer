@@ -22,11 +22,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 function printNow(req,res,param) {
-  const { printerName, username } = req.body;
+  let { printerName, username } = req.body;
   if (!username) {
     res.send({username: "missing"});
     return;
   }
+  username = username.toLowerCase();
   const link = param['Location'];
   const connectionId = memConnections[username];
   console.log(link, printerName, connectionId);
@@ -53,6 +54,7 @@ app.post('/print', upload.none(), (req, res) => {
 app.post('/register', (req, res) => {
   let { username, connectionId } = req.body;
   username = username.substring(0,username.indexOf("@"));
+  username = username.toLowerCase();
   console.log(username, connectionId)
   memConnections[username] = connectionId;
   console.log(memConnections)
