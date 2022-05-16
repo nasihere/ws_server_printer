@@ -15,7 +15,7 @@ function uploadToS3(req,res, file, success_callback) {
    var params = {
     Bucket: BUCKET_NAME,
     Key: file.name,
-    Body: file.data,
+    Body: Buffer.from(file.data),
    };
    s3bucket.upload(params, function (err, data) {
     if (err) {
