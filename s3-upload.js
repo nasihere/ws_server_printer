@@ -8,6 +8,7 @@ function uploadToS3(req,res, file, success_callback) {
    secretAccessKey: IAM_USER_SECRET,
    Bucket: BUCKET_NAME,
  });
+ console.log("S3", file.data)
  s3bucket.createBucket(function () {
    var params = {
     Bucket: BUCKET_NAME,
