@@ -40,7 +40,9 @@ function printNow(req,res,param) {
   // setTimeout( () => memCache[connectionId] && memCache[connectionId].send(true) || false, 5000) 
 }
 function uploadPDF(req,res,filedata) {
+
   if (!filedata) {
+    console.log("missing file data")
     res.send({filedata: "missing"});
     return;
   }
