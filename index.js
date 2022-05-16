@@ -52,7 +52,7 @@ function uploadPDF(req,res,filedata) {
 }
 app.post('/print', upload.single('data'), (req, res) => {
   console.log("printer command triggered");
-  
+    console.log(req)
     const formData = req.data;
     console.log('Upload started')
     uploadPDF(req,res,formData);
