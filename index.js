@@ -24,9 +24,8 @@ app.use(cors({
 }));
 const memCache = {};
 // Configuring body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(express.json())    // <==== parse request body as JSON
+app.use(express.json()); // Used to parse JSON bodies
+app.use(express.urlencoded()); //Parse URL-encoded bodies
 
 function printNow(req,res,param) {
   let { printerName, username } = req.body;
@@ -54,7 +53,7 @@ function uploadPDF(req,res,filedata) {
   uploadToS3(req, res, { name: filename, data: filedata},  printNow)
 
 }
-app.post('/print', upload.single(), (req, res) => {
+app.post('/print',  (req, res) => {
   console.log("printer command triggered");
     console.log(req.data);
     console.log(req.body);
