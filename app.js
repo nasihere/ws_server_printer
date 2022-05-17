@@ -10,4 +10,4 @@ app.post('/post-test', (req, res) => {
     res.sendStatus(200);
 });
 
-app.listen(8080, () => console.log(`Started server at http://localhost:8080!`));
+app.listen(3002, () => console.log(`Started server at http://localhost:8080!`));
