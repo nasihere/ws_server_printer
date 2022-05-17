@@ -18,7 +18,10 @@ const port = 3002;
 // Where we will keep books
 let books = [];
 const memConnections = {}
-app.use(cors());
+
+app.use(cors({
+  origin: '*'
+}));
 const memCache = {};
 // Configuring body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
