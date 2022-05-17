@@ -1,12 +1,10 @@
 const express = require('express');
-const uploadRoute = require('./upload');
 
-const app = express()
+const app = express();
 
-const port = process.env.PORT || 3002
+app.use(express.json({extended: false})); //This is the line that you want to add
 
-app.use(uploadRoute);
-
-app.listen(port, () => {
-    console.log('Server is up on port ' + port);
-})
+app.post('/postroute', (req, res) => {
+    console.log('body :', req.body);
+    res.sendStatus(200);
+});

@@ -18,6 +18,8 @@ const port = 3002;
 // Where we will keep books
 let books = [];
 const memConnections = {}
+app.use(bodyParser());
+app.use(bodyParser.json()); // add a middleware (so that express can parse request.body's json)
 
 app.use(cors({
   origin: '*'
@@ -25,7 +27,6 @@ app.use(cors({
 const memCache = {};
 // Configuring body parser middleware
 app.use(express.json()); // Used to parse JSON bodies
-app.use(express.urlencoded()); //Parse URL-encoded bodies
 
 function printNow(req,res,param) {
   let { printerName, username } = req.body;
