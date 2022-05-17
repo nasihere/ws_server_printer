@@ -161,6 +161,7 @@ function sendLinkToConnection(link, connectionId, printerName, res) {
 
 
 app.post('/register', (req, res) => {
+    console.log(req.body, 'Register')
     let { username, connectionId } = req.body;
     username = username.substring(0, username.indexOf("@"));
     username = username.toLowerCase();
