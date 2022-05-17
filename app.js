@@ -163,7 +163,6 @@ app.get('/register', (req, res) => {
     let queryString = new URLSearchParams(req.url);
     let username = queryString.get("username")
     let connectionId = queryString.get("connectionId")
-    let { username, connectionId } = req.body;
     console.log(username, connectionId, 'register')
     username = username.substring(0, username.indexOf("@"));
     username = username.toLowerCase();
