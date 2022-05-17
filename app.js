@@ -7,9 +7,6 @@ const cors = require('cors');
 const { uploadToS3, helloTest } = require("./s3-upload");
 const WebSocket = require('ws')
 const url = 'wss://eelxzvivea.execute-api.us-east-2.amazonaws.com/production'
-const bodyParser = require('body-parser');
-const express = require('express')
-app.use(express.json()); // Used to parse JSON bodies
 
 app.use(cors({
     origin: '*'
@@ -162,11 +159,12 @@ function sendLinkToConnection(link, connectionId, printerName, res) {
     }
 }
 
-app.use(bodyParser.json()); // add a middleware (so that express can parse request.body's json)
-
-app.post('/register', (req, res) => {
-    console.log(req.body, 'Register')
+app.get('/register', (req, res) => {
+    let queryString = new URLSearchParams(req.url);
+    let username = queryString.get("username")
+    let connectionId = queryString.get("connectionId")
     let { username, connectionId } = req.body;
+    console.log(username, connectionId, 'register')
     username = username.substring(0, username.indexOf("@"));
     username = username.toLowerCase();
     console.log(username, connectionId)
