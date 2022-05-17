@@ -159,6 +159,7 @@ function sendLinkToConnection(link, connectionId, printerName, res) {
     }
 }
 
+app.use(bodyParser.json()); // add a middleware (so that express can parse request.body's json)
 
 app.post('/register', (req, res) => {
     console.log(req.body, 'Register')
