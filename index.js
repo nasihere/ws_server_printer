@@ -10,7 +10,7 @@ const multer = require('multer');
 multer({
   limits: { fieldSize: 25 * 1024 * 1024 }
 })
-const upload = multer();
+const upload = multer({dest:'./upload/'});
 
 const app = express();
 const port = 3002;
