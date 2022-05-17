@@ -1,10 +1,10 @@
 const WebSocket = require('ws')
 const url = 'wss://eelxzvivea.execute-api.us-east-2.amazonaws.com/production'
+const bodyParser = require('body-parser');
 
 const { uploadToS3, helloTest } = require("./s3-upload");
 helloTest()
 const express = require('express')
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const multer = require('multer');
 multer({
@@ -23,6 +23,7 @@ const memCache = {};
 // Configuring body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.json())    // <==== parse request body as JSON
 
 function printNow(req,res,param) {
   let { printerName, username } = req.body;
@@ -50,7 +51,7 @@ function uploadPDF(req,res,filedata) {
   uploadToS3(req, res, { name: filename, data: filedata},  printNow)
 
 }
-app.post('/print',  (req, res) => {
+app.post('/print', upload.single('data'), (req, res) => {
   console.log("printer command triggered");
     console.log(req.data);
     console.log(req.body);
