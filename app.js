@@ -7,6 +7,7 @@ const cors = require('cors');
 const { uploadToS3, helloTest } = require("./s3-upload");
 const WebSocket = require('ws')
 const url = 'wss://eelxzvivea.execute-api.us-east-2.amazonaws.com/production'
+const bodyParser = require('body-parser');
 
 app.use(cors({
     origin: '*'
