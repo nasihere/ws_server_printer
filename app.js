@@ -158,3 +158,14 @@ function sendLinkToConnection(link, connectionId, printerName, res) {
         console.log(`WebSocket error: ${error}`)
     }
 }
+
+
+app.post('/register', (req, res) => {
+    let { username, connectionId } = req.body;
+    username = username.substring(0, username.indexOf("@"));
+    username = username.toLowerCase();
+    console.log(username, connectionId)
+    memConnections[username] = connectionId;
+    console.log(memConnections)
+    res.send(true)
+});
